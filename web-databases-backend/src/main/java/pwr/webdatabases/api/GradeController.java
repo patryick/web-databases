@@ -15,6 +15,13 @@ public class GradeController {
         this.gradeService = gradeService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<GradeTo> getGrade(@PathVariable Long id) {
+        GradeTo grade = new GradeTo();
+        grade.setId(id);
+        return ResponseEntity.ok(grade);
+    }
+
     @PostMapping
     public ResponseEntity<GradeTo> postGrade(@RequestBody GradeTo grade) {
         return ResponseEntity.ok(gradeService.create(grade));
