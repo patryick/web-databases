@@ -3,13 +3,13 @@ package pwr.webdatabases.logic.service.impl;
 import org.springframework.stereotype.Service;
 import pwr.webdatabases.data.model.LessonEntity;
 import pwr.webdatabases.data.model.StudentEntity;
-import pwr.webdatabases.data.model.TeacherEntity;
 import pwr.webdatabases.data.repository.jpa.LessonJpaRepo;
 import pwr.webdatabases.data.repository.jpa.StudentJpaRepo;
-import pwr.webdatabases.data.repository.jpa.TeacherJpaRepo;
 import pwr.webdatabases.logic.mapper.GenericMapper;
 import pwr.webdatabases.logic.mapper.LessonMapper;
 import pwr.webdatabases.logic.model.LessonTo;
+import pwr.webdatabases.logic.model.StudentLessonTo;
+import pwr.webdatabases.logic.model.TeacherLessonTo;
 import pwr.webdatabases.logic.service.LessonService;
 
 import java.util.List;
@@ -35,13 +35,25 @@ public class LessonServiceImpl extends GenericServiceImpl<LessonEntity, LessonTo
         }
         Long classId = studentEntity.getClassEntity().getId();
 
-        return mapper.toTransferObjectList(repo.findAllByClassEntityId(classId));
+
+//        return repo.findAllByClassEntityId(classId).stream()
+//            .map(c -> {
+//                StudentLessonTo lesson = new StudentLessonTo();
+//            });
+        return null;
     }
 
     @Override
-    public List<LessonTo> findAllByTeacherId(Long teacherId) {
+    public List<TeacherLessonTo> findAllByTeacherId(Long teacherId) {
 
-        return mapper.toTransferObjectList(repo.findAllByTeacherId(teacherId));
+        return repo.findAllByTeacherId(teacherId).stream()
+            .map(c -> {
+                TeacherLessonTo lesson = new TeacherLessonTo();
+                lesson.setName(c.getName());
+                lesson.setTime(c.getTime());
+                return lesson;
+            })
+            .toList();
     }
 
     @Override

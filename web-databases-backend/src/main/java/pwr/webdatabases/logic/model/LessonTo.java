@@ -4,8 +4,7 @@ public class LessonTo extends AbstractTo {
 
     private TeacherTo teacher;
     private ClassTo classTo;
-    private String subject;
-    private String classNumber;
+    private String name;
 
     public TeacherTo getTeacher() {
         return teacher;
@@ -23,19 +22,12 @@ public class LessonTo extends AbstractTo {
         this.classTo = classTo;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getName() {
+        return name;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getClassNumber() {
-        return classNumber;
-    }
-
-    public void setClassNumber(String classNumber) {
-        this.classNumber = classNumber;
-    }
 }

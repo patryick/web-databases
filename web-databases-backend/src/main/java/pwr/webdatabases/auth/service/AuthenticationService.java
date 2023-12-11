@@ -58,6 +58,7 @@ public class AuthenticationService {
         } else {
             jwtAuthenticationResponse.setUserId(user.getTeacher().getId());
         }
+        jwtAuthenticationResponse.setRole(user.getRole());
         return jwtAuthenticationResponse;
     }
 }

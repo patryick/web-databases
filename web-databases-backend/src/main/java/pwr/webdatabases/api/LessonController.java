@@ -3,6 +3,7 @@ package pwr.webdatabases.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pwr.webdatabases.logic.model.LessonTo;
+import pwr.webdatabases.logic.model.TeacherLessonTo;
 import pwr.webdatabases.logic.service.LessonService;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class LessonController {
     }
 
     @GetMapping("/teachers/{teacherId}")
-    public ResponseEntity<List<LessonTo>> getLessonsByTeacherId(@PathVariable Long teacherId) {
+    public ResponseEntity<List<TeacherLessonTo>> getLessonsByTeacherId(@PathVariable Long teacherId) {
         return ResponseEntity.ok(lessonService.findAllByTeacherId(teacherId));
     }
 

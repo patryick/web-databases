@@ -12,6 +12,7 @@ public class LessonEntity extends AbstractEntity {
     @ManyToOne
     private ClassEntity classEntity;
     private String name;
+    private String time;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -35,5 +36,13 @@ public class LessonEntity extends AbstractEntity {
 
     public void setName(String subject) {
         this.name = subject;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
