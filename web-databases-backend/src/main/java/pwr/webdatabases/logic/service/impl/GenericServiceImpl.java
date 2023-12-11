@@ -6,16 +6,33 @@ import pwr.webdatabases.logic.mapper.GenericMapper;
 import pwr.webdatabases.logic.model.AbstractTo;
 import pwr.webdatabases.logic.service.GenericService;
 
+import java.util.List;
+
 
 public abstract class GenericServiceImpl<T extends AbstractEntity, K extends AbstractTo> implements GenericService<K> {
 
-    private final JpaRepo <T> repo;
-    private final GenericMapper<T, K> mapper = getMapper();
+    protected final JpaRepo <T> repo;
+    protected final GenericMapper<T, K> mapper = getMapper();
 
     protected GenericServiceImpl(JpaRepo<T> repo) {
         this.repo = repo;
     }
 
+    @Override
+    public K findById(Long id) {
+        if (null == id) {
+            throw new RuntimeException();
+        }
+
+        return mapper.toTransferObject(repo.findById(id).orElse(null));
+    }
+
+    @Override
+    public List<K> findAll() {
+        return mapper.toTransferObjectList(repo.findAll());
+    }
+
+    @Override
     public K create(K object) {
 
         if (null == object) {
@@ -28,6 +45,7 @@ public abstract class GenericServiceImpl<T extends AbstractEntity, K extends Abs
         return mapper.toTransferObject(repo.save(mapper.toEntity(object)));
     }
 
+    @Override
     public K update(K object) {
 
         if (null == object) {
@@ -40,6 +58,7 @@ public abstract class GenericServiceImpl<T extends AbstractEntity, K extends Abs
         return mapper.toTransferObject(repo.save(mapper.toEntity(object)));
     }
 
+    @Override
     public void delete(K object) { //TODO delete by parameter -> which one?
 
         if (null == object) {

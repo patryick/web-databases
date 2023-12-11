@@ -34,7 +34,7 @@ public class AuthenticationService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(Role.STUDENT);
+        //user.setRole(Role.STUDENT);
 
         user = userService.save(user);
         var jwt = jwtService.generateToken(user);
@@ -53,6 +53,11 @@ public class AuthenticationService {
         var jwt = jwtService.generateToken(user);
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);
+        if (user.getRole() == Role.STUDENT) {
+            jwtAuthenticationResponse.setUserId(user.getStudent().getId());
+        } else {
+            jwtAuthenticationResponse.setUserId(user.getTeacher().getId());
+        }
         return jwtAuthenticationResponse;
     }
 }

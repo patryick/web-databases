@@ -11,8 +11,7 @@ public class LessonEntity extends AbstractEntity {
     private TeacherEntity teacher;
     @ManyToOne
     private ClassEntity classEntity;
-    private String subject;
-    private String classNumber;
+    private String name;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -30,19 +29,11 @@ public class LessonEntity extends AbstractEntity {
         this.classEntity = classEntity;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getName() {
+        return name;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getClassNumber() {
-        return classNumber;
-    }
-
-    public void setClassNumber(String classNumber) {
-        this.classNumber = classNumber;
+    public void setName(String subject) {
+        this.name = subject;
     }
 }

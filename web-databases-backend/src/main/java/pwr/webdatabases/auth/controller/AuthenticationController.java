@@ -1,5 +1,6 @@
 package pwr.webdatabases.auth.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import pwr.webdatabases.auth.to.SignInRequest;
 import pwr.webdatabases.auth.to.SignUpRequest;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;

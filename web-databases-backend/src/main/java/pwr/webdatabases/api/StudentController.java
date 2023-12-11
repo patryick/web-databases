@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import pwr.webdatabases.logic.model.StudentTo;
 import pwr.webdatabases.logic.service.StudentService;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/students")
 public class StudentController {
 
@@ -13,6 +16,16 @@ public class StudentController {
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentTo> getStudentById(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.findById(id));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<StudentTo>> getAllStudents() {
+        return ResponseEntity.ok(studentService.findAll());
     }
 
     @PostMapping

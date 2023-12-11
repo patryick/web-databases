@@ -1,7 +1,7 @@
 package pwr.webdatabases.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import pwr.webdatabases.auth.data.model.User;
 
 import java.time.LocalDateTime;
 

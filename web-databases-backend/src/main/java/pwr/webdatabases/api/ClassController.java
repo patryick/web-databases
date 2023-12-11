@@ -6,6 +6,7 @@ import pwr.webdatabases.logic.model.ClassTo;
 import pwr.webdatabases.logic.service.ClassService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/classes")
 public class ClassController {
 

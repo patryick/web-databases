@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pwr.webdatabases.data.model.StudentEntity;
+import pwr.webdatabases.data.model.TeacherEntity;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -23,6 +25,10 @@ public class User implements UserDetails {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    @OneToOne
+    private TeacherEntity teacher;
+    @OneToOne
+    private StudentEntity student;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -87,10 +93,6 @@ public class User implements UserDetails {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -105,5 +107,29 @@ public class User implements UserDetails {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public TeacherEntity getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherEntity teacher) {
+        if (this.role == Role.STUDENT) {
+            throw new RuntimeException("This user role is STUDENT, you cannot assign TEACHER");
+        }
+        this.teacher = teacher;
+        this.role = Role.TEACHER;
+    }
+
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        if (this.role == Role.TEACHER) {
+            throw new RuntimeException("This user role is TEACHER, you cannot assign STUDENT");
+        }
+        this.student = student;
+        this.role = Role.STUDENT;
     }
 }

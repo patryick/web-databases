@@ -68,49 +68,20 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(
                     mvcMatcherBuilder.pattern("/grades/*"),
-                    mvcMatcherBuilder.pattern("/students/*")
+                    mvcMatcherBuilder.pattern("/students/*"),
+                    mvcMatcherBuilder.pattern("/lessons/students/**"),
+                    mvcMatcherBuilder.pattern("/classes/*"),
+                    mvcMatcherBuilder.pattern("/teachers/**")
                 )
-                .hasAuthority(Role.STUDENT.toString())
+                .hasAnyAuthority(Role.STUDENT.toString(), Role.TEACHER.toString())
+                .requestMatchers(
+                    mvcMatcherBuilder.pattern("/lessons/teachers/**")
+                )
+                .hasAuthority(Role.TEACHER.toString())
                 .anyRequest().denyAll()
             )
             .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-//
-//        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-//
-//        if (isOtherService) {
-//            http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .sessionManagement(session ->
-//                    session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
-//                .authorizeHttpRequests(authorize -> authorize
-//                    .requestMatchers(
-//                        mvcMatcherBuilder.pattern("test/users")
-//                    ).access((authentication, object) -> authentication
-//                        .get().getAuthorities().stream()
-//                        .map(Objects::toString)
-//                        .filter(a -> a.equals(Role.STUDENT.toString()))
-//                        .findAny()
-//                        .isEmpty() ? new AuthorizationDecision(false): new AuthorizationDecision(true)
-//                    )
-//                )
-//                .authorizeHttpRequests(authorize -> authorize
-//                    .requestMatchers(
-//                        mvcMatcherBuilder.pattern("/test/anon"),
-//                        mvcMatcherBuilder.pattern("/signin"),
-//                        mvcMatcherBuilder.pattern("/signup")
-//                    ).permitAll()
-//                )
-//                .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);;
-//        }
-//
-//        return http.build();
-//    }
 }
