@@ -7,9 +7,7 @@ import pwr.webdatabases.data.repository.jpa.LessonJpaRepo;
 import pwr.webdatabases.data.repository.jpa.StudentJpaRepo;
 import pwr.webdatabases.logic.mapper.GenericMapper;
 import pwr.webdatabases.logic.mapper.LessonMapper;
-import pwr.webdatabases.logic.model.LessonTo;
-import pwr.webdatabases.logic.model.StudentLessonTo;
-import pwr.webdatabases.logic.model.TeacherLessonTo;
+import pwr.webdatabases.logic.model.*;
 import pwr.webdatabases.logic.service.LessonService;
 
 import java.util.List;
@@ -60,6 +58,24 @@ public class LessonServiceImpl extends GenericServiceImpl<LessonEntity, LessonTo
                 return lesson;
             })
             .toList();
+    }
+
+    @Override
+    public LessonDetailsTo findDetailsById(Long lessonId) {
+        LessonEntity entity = repo.findById(lessonId).orElse(null);
+        LessonDetailsTo details = new LessonDetailsTo();
+        details.setName(entity.getLessonName());
+        details.setTime(entity.getLessonDay() + ", " + entity.getLessonStartTime());
+        details.setStudentsList(entity.getClassEntity().getStudents().stream()
+            .map(c -> {
+                StudentFullNameViewTo student = new StudentFullNameViewTo();
+                student.setId(c.getId());
+                student.setFullName(c.getName() + " " + c.getSurname());
+                return student;
+            })
+            .toList());
+
+        return details;
     }
 
     @Override

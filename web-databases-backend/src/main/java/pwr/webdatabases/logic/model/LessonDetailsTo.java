@@ -6,7 +6,7 @@ public class LessonDetailsTo extends AbstractTo {
 
     private String name;
     private String time;
-    private List<StudentTo> studentsList;
+    private List<StudentFullNameViewTo> studentsList;
 
     public String getName() {
         return name;
@@ -24,11 +24,11 @@ public class LessonDetailsTo extends AbstractTo {
         this.time = time;
     }
 
-    public List<StudentTo> getStudentsList() {
+    public List<StudentFullNameViewTo> getStudentsList() {
         return studentsList;
     }
 
-    public void setStudentsList(List<StudentTo> studentsList) {
+    public void setStudentsList(List<StudentFullNameViewTo> studentsList) {
         this.studentsList = studentsList;
     }
 }
