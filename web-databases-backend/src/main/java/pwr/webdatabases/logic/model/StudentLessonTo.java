@@ -3,7 +3,7 @@ package pwr.webdatabases.logic.model;
 public class StudentLessonTo {
 
     private String day;
-    private String lesson;
+    private String name;
     private String startTime;
     private String endTime;
     private String teacher;
@@ -16,12 +16,12 @@ public class StudentLessonTo {
         this.day = day;
     }
 
-    public String getLesson() {
-        return lesson;
+    public String getName() {
+        return name;
     }
 
-    public void setLesson(String lesson) {
-        this.lesson = lesson;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStartTime() {

@@ -7,12 +7,14 @@ import jakarta.persistence.OneToOne;
 @Entity(name = "LESSON")
 public class LessonEntity extends AbstractEntity {
 
-    @OneToOne
+    @ManyToOne
     private TeacherEntity teacher;
     @ManyToOne
     private ClassEntity classEntity;
-    private String name;
-    private String time;
+    private String lessonName;
+    private String lessonDay;
+    private String lessonStartTime;
+    private String lessonEndTime;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -30,19 +32,35 @@ public class LessonEntity extends AbstractEntity {
         this.classEntity = classEntity;
     }
 
-    public String getName() {
-        return name;
+    public String getLessonName() {
+        return lessonName;
     }
 
-    public void setName(String subject) {
-        this.name = subject;
+    public void setLessonName(String subject) {
+        this.lessonName = subject;
     }
 
-    public String getTime() {
-        return time;
+    public String getLessonDay() {
+        return lessonDay;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setLessonDay(String day) {
+        this.lessonDay = day;
+    }
+
+    public String getLessonStartTime() {
+        return lessonStartTime;
+    }
+
+    public void setLessonStartTime(String startTime) {
+        this.lessonStartTime = startTime;
+    }
+
+    public String getLessonEndTime() {
+        return lessonEndTime;
+    }
+
+    public void setLessonEndTime(String endTime) {
+        this.lessonEndTime = endTime;
     }
 }

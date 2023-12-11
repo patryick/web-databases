@@ -27,7 +27,7 @@ public class LessonServiceImpl extends GenericServiceImpl<LessonEntity, LessonTo
     }
 
     @Override
-    public List<LessonTo> findAllByStudentId(Long studentId) {
+    public List<StudentLessonTo> findAllByStudentId(Long studentId) {
 
         StudentEntity studentEntity = studentJpaRepo.findById(studentId).orElse(null);
         if (null == studentEntity) {
@@ -36,11 +36,17 @@ public class LessonServiceImpl extends GenericServiceImpl<LessonEntity, LessonTo
         Long classId = studentEntity.getClassEntity().getId();
 
 
-//        return repo.findAllByClassEntityId(classId).stream()
-//            .map(c -> {
-//                StudentLessonTo lesson = new StudentLessonTo();
-//            });
-        return null;
+        return repo.findAllByClassEntityId(classId).stream()
+            .map(c -> {
+                StudentLessonTo lesson = new StudentLessonTo();
+                lesson.setName(c.getLessonName());
+                lesson.setTeacher(c.getTeacher().getName());
+                lesson.setDay(c.getLessonDay());
+                lesson.setStartTime(c.getLessonStartTime());
+                lesson.setEndTime(c.getLessonEndTime());
+                return lesson;
+            })
+            .toList();
     }
 
     @Override
@@ -49,8 +55,8 @@ public class LessonServiceImpl extends GenericServiceImpl<LessonEntity, LessonTo
         return repo.findAllByTeacherId(teacherId).stream()
             .map(c -> {
                 TeacherLessonTo lesson = new TeacherLessonTo();
-                lesson.setName(c.getName());
-                lesson.setTime(c.getTime());
+                lesson.setName(c.getLessonName());
+                lesson.setTime(c.getLessonDay() + ", " + c.getLessonStartTime());
                 return lesson;
             })
             .toList();

@@ -67,15 +67,15 @@ public class SecurityConfig {
                 )
                 .permitAll()
                 .requestMatchers(
-                    mvcMatcherBuilder.pattern("/grades/*"),
-                    mvcMatcherBuilder.pattern("/students/*"),
-                    mvcMatcherBuilder.pattern("/lessons/students/**"),
-                    mvcMatcherBuilder.pattern("/classes/*"),
+                    mvcMatcherBuilder.pattern("/grades/**"),
+                    mvcMatcherBuilder.pattern("/students/**"),
+                    mvcMatcherBuilder.pattern("/lessons/**"),
+                    mvcMatcherBuilder.pattern("/classes/**"),
                     mvcMatcherBuilder.pattern("/teachers/**")
                 )
                 .hasAnyAuthority(Role.STUDENT.toString(), Role.TEACHER.toString())
                 .requestMatchers(
-                    mvcMatcherBuilder.pattern("/lessons/teachers/**")
+                    mvcMatcherBuilder.pattern("/grades")
                 )
                 .hasAuthority(Role.TEACHER.toString())
                 .anyRequest().denyAll()
