@@ -28,7 +28,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/teachers/{teacherId}")
-    @PreAuthorize("#studentId == authentication.principal.id")
+    @PreAuthorize("#teacherId == authentication.principal.id")
     public ResponseEntity<List<TeacherLessonTo>> getScheduleForTeacher(@PathVariable Long teacherId) {
         return ResponseEntity.ok(scheduleService.getScheduleForTeacher(teacherId));
     }

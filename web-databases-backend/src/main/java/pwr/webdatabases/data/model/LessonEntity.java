@@ -3,6 +3,8 @@ package pwr.webdatabases.data.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
+import java.time.LocalTime;
+
 @Entity(name = "LESSON")
 public class LessonEntity extends AbstractEntity {
 
@@ -12,8 +14,8 @@ public class LessonEntity extends AbstractEntity {
     private ClassEntity classEntity;
     private String name;
     private String lessonDay;
-    private String startTime;
-    private String endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -47,19 +49,31 @@ public class LessonEntity extends AbstractEntity {
         this.lessonDay = day;
     }
 
-    public String getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "LessonEntity{" +
+            "teacher=" + teacher +
+            ", classEntity=" + classEntity +
+            ", name='" + name + '\'' +
+            ", lessonDay='" + lessonDay + '\'' +
+            ", startTime='" + startTime + '\'' +
+            ", endTime='" + endTime + '\'' +
+            '}';
     }
 }

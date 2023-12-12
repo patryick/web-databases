@@ -37,4 +37,13 @@ public class AbsenceEntity extends AbstractEntity {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "AbsenceEntity{" +
+            "student=" + student +
+            ", lesson=" + lesson +
+            ", date=" + date +
+            '}';
+    }
 }

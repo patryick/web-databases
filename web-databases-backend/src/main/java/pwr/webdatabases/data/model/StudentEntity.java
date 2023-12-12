@@ -58,4 +58,15 @@ public class StudentEntity extends AbstractEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "StudentEntity{" +
+            "grades=" + grades +
+            ", absences=" + absences +
+            ", classEntity=" + classEntity +
+            ", user=" + user +
+            ", dateOfBirth=" + dateOfBirth +
+            '}';
+    }
 }

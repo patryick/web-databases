@@ -1,10 +1,14 @@
 package pwr.webdatabases.config;
 
+import jakarta.persistence.Transient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pwr.webdatabases.auth.data.model.User;
+import pwr.webdatabases.auth.data.repo.UserJpaRepo;
 import pwr.webdatabases.auth.service.UserService;
 import pwr.webdatabases.data.model.ClassEntity;
 import pwr.webdatabases.data.model.LessonEntity;
@@ -15,7 +19,14 @@ import pwr.webdatabases.data.repository.jpa.LessonJpaRepo;
 import pwr.webdatabases.data.repository.jpa.StudentJpaRepo;
 import pwr.webdatabases.data.repository.jpa.TeacherJpaRepo;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 @Component
+@Transactional
 public class SeedDataConfig implements CommandLineRunner {
 
     @Value("${is.seed.data.config.active}")
@@ -26,14 +37,37 @@ public class SeedDataConfig implements CommandLineRunner {
     private final LessonJpaRepo lessonJpaRepo;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final UserJpaRepo userJpaRepo;
+    Random random = new Random();
+    private static List<String> NAMES = List.of(
+        "Patrick", "Hubert", "Anna", "John", "Patricia", "Joe", "Mark", "Michael", "Jack",
+        "Ralph", "Franklin", "Trevor", "Barry"
+    );
+    private static List<String> SURNAMES = List.of("Smith", "Johnson", "Williams", "Jones", "Brown",
+        "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas");
+    private static List<String> PASSWORDS = List.of("password3", "password1", "password2");
+    private static List<String> LESSONS = List.of("math", "physics", "pe", "biology", "chemistry", "history", "english", "german", "religion");
+    private static List<String> DAY = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+    private List<TeacherEntity> teachers = new LinkedList<>();
+    private static List<LocalTime> TIMES = List.of(
+        LocalTime.of(8,0),
+        LocalTime.of(9,45),
+        LocalTime.of(10,40),
+        LocalTime.of(11,35),
+        LocalTime.of(12,40),
+        LocalTime.of(13,35),
+        LocalTime.of(14,30)
+        );
 
-    public SeedDataConfig(StudentJpaRepo studentJpaRepo, TeacherJpaRepo teacherJpaRepo, ClassJpaRepo classJpaRepo, LessonJpaRepo lessonJpaRepo, PasswordEncoder passwordEncoder, UserService userService) {
+
+    public SeedDataConfig(StudentJpaRepo studentJpaRepo, TeacherJpaRepo teacherJpaRepo, ClassJpaRepo classJpaRepo, LessonJpaRepo lessonJpaRepo, PasswordEncoder passwordEncoder, UserService userService, UserJpaRepo userJpaRepo) {
         this.studentJpaRepo = studentJpaRepo;
         this.teacherJpaRepo = teacherJpaRepo;
         this.classJpaRepo = classJpaRepo;
         this.lessonJpaRepo = lessonJpaRepo;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.userJpaRepo = userJpaRepo;
     }
 
     @Override
@@ -54,48 +88,57 @@ public class SeedDataConfig implements CommandLineRunner {
 //            userService.save(student);
 //        }
 
-        TeacherEntity teacherEntity = new TeacherEntity();
-        teacherJpaRepo.save(teacherEntity);
+        ClassEntity firstClassA = new ClassEntity();
+        firstClassA.setName("1a");
+        classJpaRepo.save(firstClassA);
 
-        ClassEntity classEntity = new ClassEntity();
-        classEntity.setName("1a");
-        classJpaRepo.save(classEntity);
+        for (int i = 0; i < 9; i++) {
 
-        LessonEntity lesson1 = new LessonEntity();
-        lesson1.setName("math");
-        lesson1.setClassEntity(classEntity);
-        lesson1.setTeacher(teacherEntity);
-        lessonJpaRepo.save(lesson1);
+            TeacherEntity teacher = new TeacherEntity();
+            teacher = teacherJpaRepo.save(teacher);
+            teachers.add(teacher);
 
-        LessonEntity lesson2 = new LessonEntity();
-        lesson2.setName("pe");
-        lesson2.setClassEntity(classEntity);
-        lesson2.setTeacher(teacherEntity);
-        lessonJpaRepo.save(lesson2);
+            User user = new User();
+            user.setName(NAMES.get(random.nextInt(NAMES.size() - 1)));
+            user.setSurname(SURNAMES.get(random.nextInt(NAMES.size() - 1)));
+            user.setEmail(user.getName() + "." + user.getSurname() + i + "@teacher.com");
+            user.setUsername("teacher" + user.getName() + i);
+            user.setPassword(passwordEncoder.encode("teacher" + user.getName() + i));
+            user.setTeacher(teacher);
+            userService.save(user);
+        }
 
-        StudentEntity studentEntity = new StudentEntity();
-        studentEntity.setClassEntity(classEntity);
-        studentJpaRepo.save(studentEntity);
+        for (int i = 0; i < 24; i++) {
 
-        User student = new User();
-        student.setName("student");
-        student.setSurname("student");
-        student.setUsername("student");
-        student.setEmail("student@student.com");
-        student.setPassword(passwordEncoder.encode("password"));
-        student.setStudent(studentEntity);
-        student.setStudent(studentEntity);
-        userService.save(student);
+            StudentEntity student = new StudentEntity();
+            student.setDateOfBirth(LocalDateTime.now());
+            student.setClassEntity(firstClassA);
+            studentJpaRepo.save(student);
 
-        User teacher = new User();
-        teacher.setName("teacher");
-        teacher.setSurname("teacher");
-        teacher.setUsername("teacher");
-        teacher.setEmail("teacher@teacher.com");
-        teacher.setPassword(passwordEncoder.encode("password"));
-        teacher.setTeacher(teacherEntity);
-        teacher.setTeacher(teacherEntity);
-        userService.save(teacher);
+            User user = new User();
+            user.setName(NAMES.get(random.nextInt(NAMES.size() - 1)));
+            user.setSurname(SURNAMES.get(random.nextInt(NAMES.size() - 1)));
+            user.setEmail(user.getName() + "." + user.getSurname() + i + "@student.com");
+            user.setUsername(user.getName() + i);
+            user.setPassword(passwordEncoder.encode(user.getName() + i));
+            user.setStudent(student);
+            userService.save(user);
+        }
 
+        for (String day: DAY) {
+            for (LocalTime time: TIMES) {
+
+                LessonEntity lesson = new LessonEntity();
+                lesson.setLessonDay(day);
+                lesson.setName(LESSONS.get(random.nextInt(LESSONS.size() - 1)));
+                lesson.setStartTime(time);
+                lesson.setEndTime(time.plusMinutes(45));
+                lesson.setClassEntity(firstClassA);
+                lesson.setTeacher(teachers.get(random.nextInt(teachers.size() - 1)));
+                lessonJpaRepo.save(lesson);
+            }
+        }
+
+        userJpaRepo.findAll().forEach(System.out::println);
     }
 }

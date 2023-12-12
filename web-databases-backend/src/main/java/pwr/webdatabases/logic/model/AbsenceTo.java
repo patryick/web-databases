@@ -1,16 +1,23 @@
 package pwr.webdatabases.logic.model;
 
-import java.time.LocalDate;
+public class AbsenceTo extends AbsenceDetailsTo {
 
-public class AbsenceTo extends AbstractTo {
+    private Long student;
+    private Long lesson;
 
-    private LocalDate date;
-
-    public LocalDate getDate() {
-        return date;
+    public Long getStudent() {
+        return student;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStudent(Long student) {
+        this.student = student;
+    }
+
+    public Long getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Long lesson) {
+        this.lesson = lesson;
     }
 }

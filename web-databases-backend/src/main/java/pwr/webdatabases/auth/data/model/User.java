@@ -150,4 +150,21 @@ public class User implements UserDetails {
         this.student = student;
         this.role = Role.STUDENT;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", email='" + email + '\'' +
+            ", role=" + role +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            ", name='" + name + '\'' +
+            ", surname='" + surname + '\'' +
+            ", teacher=" + teacher +
+            ", student=" + student +
+            '}';
+    }
 }

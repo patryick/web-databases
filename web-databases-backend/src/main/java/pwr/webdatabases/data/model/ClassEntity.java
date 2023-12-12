@@ -7,19 +7,9 @@ import java.util.List;
 @Entity(name = "CLASS")
 public class ClassEntity extends AbstractEntity {
 
-    @ManyToOne
-    private TeacherEntity teacher;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "classEntity")
+    @OneToMany(mappedBy = "classEntity")
     private List<StudentEntity> students;
     private String name;
-
-    public TeacherEntity getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(TeacherEntity teacher) {
-        this.teacher = teacher;
-    }
 
     public String getName() {
         return name;
@@ -35,5 +25,13 @@ public class ClassEntity extends AbstractEntity {
 
     public void setStudents(List<StudentEntity> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassEntity{" +
+            "students=" + students +
+            ", name='" + name + '\'' +
+            '}';
     }
 }

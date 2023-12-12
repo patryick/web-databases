@@ -30,7 +30,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentLessonDetailsTo findStudentLessonDetailsByIdAndLessonId(Long lessonId, Long studentId) {
 
-        StudentEntity student = studentJpaRepo.findById(studentId).orElseThrow(() -> new RuntimeException("Student with id: " + studentId + " not found."));
+        StudentEntity student = studentJpaRepo.findById(studentId)
+            .orElseThrow(() -> new RuntimeException("Student with id: " + studentId + " not found."));
         List<GradeEntity> grades = gradeJpaRepo.findAllByLessonId(lessonId);
         List<AbsenceEntity> absences = absenceJpaRepo.findAllByLessonId(lessonId);
         student.setGrades(grades);

@@ -8,9 +8,7 @@ import pwr.webdatabases.auth.data.model.User;
 public class TeacherEntity extends AbstractEntity {
 
     @OneToOne
-    private ClassEntity classEntity;
-    @OneToOne
-    private TeacherEntity teacher;
+    private LessonEntity lesson;
     @OneToOne
     private User user;
 
@@ -22,20 +20,19 @@ public class TeacherEntity extends AbstractEntity {
         this.user = user;
     }
 
-    public TeacherEntity getTeacher() {
-        return teacher;
+    public LessonEntity getLesson() {
+        return lesson;
     }
 
-    public void setTeacher(TeacherEntity teacher) {
-        this.teacher = teacher;
+    public void setLesson(LessonEntity lesson) {
+        this.lesson = lesson;
     }
 
-    public ClassEntity getClassEntity() {
-        return classEntity;
+    @Override
+    public String toString() {
+        return "TeacherEntity{" +
+            "lesson=" + lesson +
+            ", user=" + user +
+            '}';
     }
-
-    public void setClassEntity(ClassEntity classEntity) {
-        this.classEntity = classEntity;
-    }
-
 }

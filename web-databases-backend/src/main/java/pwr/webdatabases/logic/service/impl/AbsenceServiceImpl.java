@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pwr.webdatabases.data.model.AbsenceEntity;
 import pwr.webdatabases.data.repository.jpa.AbsenceJpaRepo;
 import pwr.webdatabases.logic.mapper.AbsenceMapper;
+import pwr.webdatabases.logic.model.AbsenceDetailsTo;
 import pwr.webdatabases.logic.model.AbsenceTo;
 import pwr.webdatabases.logic.service.AbsenceService;
 
@@ -21,12 +22,12 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public List<AbsenceTo> findAllByStudentId(Long studentId) {
+    public List<AbsenceDetailsTo> findAllByStudentId(Long studentId) {
         return absenceMapper.toToList(absenceJpaRepo.findAllByStudentId(studentId));
     }
 
     @Override
-    public AbsenceTo saveAbsence(AbsenceTo absence) {
+    public AbsenceDetailsTo saveAbsence(AbsenceTo absence) {
 
         Objects.requireNonNull(absence);
 
@@ -34,7 +35,7 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public AbsenceTo updateAbsence(AbsenceTo absence, Long id) {
+    public AbsenceDetailsTo updateAbsence(AbsenceDetailsTo absence, Long id) {
 
         Objects.requireNonNull(absence);
         AbsenceEntity entity = absenceJpaRepo.getReferenceById(id);
@@ -44,7 +45,7 @@ public class AbsenceServiceImpl implements AbsenceService {
         return absenceMapper.toTo(absenceJpaRepo.save(entity));
     }
 
-    private void updateAbsence(AbsenceEntity entity, AbsenceTo to) {
+    private void updateAbsence(AbsenceEntity entity, AbsenceDetailsTo to) {
         if (null != to.getDate()) {
             entity.setDate(to.getDate());
         }

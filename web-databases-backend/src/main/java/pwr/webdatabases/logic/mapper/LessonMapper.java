@@ -8,6 +8,7 @@ import pwr.webdatabases.logic.model.StudentLessonTo;
 import pwr.webdatabases.logic.model.LessonDetailsTo;
 import pwr.webdatabases.logic.model.TeacherLessonTo;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Mapper(uses = StudentMapper.class)
@@ -25,6 +26,10 @@ public interface LessonMapper {
     @Mapping(target = "day", source = "lesson.lessonDay")
     @Mapping(target = "students", source = "lesson.classEntity.students")
     LessonDetailsTo toStudentsTo(LessonEntity lesson);
+
+    default String map(LocalTime time) {
+        return time.toString();
+    }
 
     default List<TeacherLessonTo> toRawToList(List<LessonEntity> lessons) {
         return lessons.stream()
