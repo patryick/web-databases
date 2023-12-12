@@ -13,5 +13,6 @@ public interface AbsenceMapper {
     AbsenceMapper INSTANCE = Mappers.getMapper(AbsenceMapper.class);
 
     AbsenceTo toTo(AbsenceEntity absence);
-    List<AbsenceTo> toToList(List<AbsenceTo> absences);
+    AbsenceEntity toEntity(AbsenceTo absence);
+    List<AbsenceTo> toToList(List<AbsenceEntity> absences);
 }

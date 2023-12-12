@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface AbsenceJpaRepo extends JpaRepo <AbsenceEntity> {
 
-    List<AbsenceEntity> findAllByLessonId(long lessonId);
+    List<AbsenceEntity> findAllByLessonId(Long lessonId);
+    List<AbsenceEntity> findAllByStudentId(Long studentId);
 }

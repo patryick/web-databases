@@ -13,5 +13,6 @@ public interface GradeMapper {
     GradeMapper INSTANCE = Mappers.getMapper(GradeMapper.class);
 
     GradeTo toTo(GradeEntity grade);
+    GradeEntity toEntity(GradeTo grade);
     List<GradeTo> toToList(List<GradeEntity> grades);
 }
