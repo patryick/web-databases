@@ -2,9 +2,8 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.webdatabases.logic.model.LessonDetailsTo;
-import pwr.webdatabases.logic.model.LessonTo;
 import pwr.webdatabases.logic.model.StudentLessonTo;
+import pwr.webdatabases.logic.model.TeacherLessonDetailsTo;
 import pwr.webdatabases.logic.model.TeacherLessonTo;
 import pwr.webdatabases.logic.service.LessonService;
 
@@ -32,23 +31,7 @@ public class LessonController {
     }
 
     @GetMapping("/details/{lessonId}")
-    public ResponseEntity<LessonDetailsTo> getLessonsDetailsById(@PathVariable Long lessonId) {
+    public ResponseEntity<TeacherLessonDetailsTo> getLessonsDetailsById(@PathVariable Long lessonId) {
         return ResponseEntity.ok(lessonService.findDetailsById(lessonId));
-    }
-
-    @PostMapping
-    public ResponseEntity<LessonTo> postLesson(@RequestBody LessonTo lesson) {
-        return ResponseEntity.ok(lessonService.create(lesson));
-    }
-
-    @PutMapping
-    public ResponseEntity<LessonTo> putLesson(@RequestBody LessonTo lesson) {
-        return ResponseEntity.ok(lessonService.update(lesson));
-    }
-
-    @DeleteMapping
-    public ResponseEntity<Void> deleteLesson(@RequestBody LessonTo lesson) {
-        lessonService.delete(lesson);
-        return ResponseEntity.noContent().build();
     }
 }

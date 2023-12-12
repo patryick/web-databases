@@ -3,7 +3,16 @@ package pwr.webdatabases.logic.model;
 public class TeacherLessonTo extends AbstractTo {
 
     private String name;
-    private String time;
+    private String day;
+    private String startTime;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public String getName() {
         return name;
@@ -13,11 +22,11 @@ public class TeacherLessonTo extends AbstractTo {
         this.name = name;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }

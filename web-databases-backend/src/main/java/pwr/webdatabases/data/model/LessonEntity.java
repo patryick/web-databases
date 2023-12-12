@@ -2,7 +2,6 @@ package pwr.webdatabases.data.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity(name = "LESSON")
 public class LessonEntity extends AbstractEntity {
@@ -11,10 +10,10 @@ public class LessonEntity extends AbstractEntity {
     private TeacherEntity teacher;
     @ManyToOne
     private ClassEntity classEntity;
-    private String lessonName;
+    private String name;
     private String lessonDay;
-    private String lessonStartTime;
-    private String lessonEndTime;
+    private String startTime;
+    private String endTime;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -32,12 +31,12 @@ public class LessonEntity extends AbstractEntity {
         this.classEntity = classEntity;
     }
 
-    public String getLessonName() {
-        return lessonName;
+    public String getName() {
+        return name;
     }
 
-    public void setLessonName(String subject) {
-        this.lessonName = subject;
+    public void setName(String subject) {
+        this.name = subject;
     }
 
     public String getLessonDay() {
@@ -48,19 +47,19 @@ public class LessonEntity extends AbstractEntity {
         this.lessonDay = day;
     }
 
-    public String getLessonStartTime() {
-        return lessonStartTime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setLessonStartTime(String startTime) {
-        this.lessonStartTime = startTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getLessonEndTime() {
-        return lessonEndTime;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setLessonEndTime(String endTime) {
-        this.lessonEndTime = endTime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

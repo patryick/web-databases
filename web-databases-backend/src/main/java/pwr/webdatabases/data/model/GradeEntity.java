@@ -13,9 +13,10 @@ public class GradeEntity extends AbstractEntity {
     @ManyToOne
     private StudentEntity student;
     @ManyToOne
-    private GradeEntity grade;
+    private LessonEntity lesson;
     private GradeValueEnum gradeValue;
     private LocalDateTime date;
+    private String details;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -33,12 +34,12 @@ public class GradeEntity extends AbstractEntity {
         this.student = student;
     }
 
-    public GradeEntity getGrade() {
-        return grade;
+    public LessonEntity getLesson() {
+        return lesson;
     }
 
-    public void setGrade(GradeEntity grade) {
-        this.grade = grade;
+    public void setLesson(LessonEntity lesson) {
+        this.lesson = lesson;
     }
 
     public GradeValueEnum getGradeValue() {
@@ -55,5 +56,13 @@ public class GradeEntity extends AbstractEntity {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

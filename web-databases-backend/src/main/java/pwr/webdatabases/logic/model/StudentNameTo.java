@@ -1,18 +1,9 @@
 package pwr.webdatabases.logic.model;
 
-public class TeacherTo extends AbstractTo {
+public class StudentNameTo extends AbstractTo {
 
-    private ClassTo classEntity;
     private String name;
     private String surname;
-
-    public ClassTo getClassEntity() {
-        return classEntity;
-    }
-
-    public void setClassEntity(ClassTo classEntity) {
-        this.classEntity = classEntity;
-    }
 
     public String getName() {
         return name;

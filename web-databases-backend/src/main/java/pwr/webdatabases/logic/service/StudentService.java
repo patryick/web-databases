@@ -1,6 +1,8 @@
 package pwr.webdatabases.logic.service;
 
-import pwr.webdatabases.logic.model.StudentTo;
+import pwr.webdatabases.logic.model.StudentLessonDetailsTo;
 
-public interface StudentService extends GenericService<StudentTo> {
+public interface StudentService {
+
+    StudentLessonDetailsTo findStudentLessonDetailsByIdAndLessonId(Long lessonId, Long studentId);
 }

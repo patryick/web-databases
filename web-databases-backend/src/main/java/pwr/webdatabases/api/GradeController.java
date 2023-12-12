@@ -2,6 +2,7 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pwr.webdatabases.data.model.GradeEntity;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
@@ -16,26 +17,22 @@ public class GradeController {
         this.gradeService = gradeService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GradeTo> getGrade(@PathVariable Long id) {
-        GradeTo grade = new GradeTo();
-        grade.setId(id);
-        return ResponseEntity.ok(grade);
-    }
-
     @PostMapping
     public ResponseEntity<GradeTo> postGrade(@RequestBody GradeTo grade) {
-        return ResponseEntity.ok(gradeService.create(grade));
+
+        return ResponseEntity.ok(gradeService.saveGrade(grade));
     }
 
-    @PutMapping
-    public ResponseEntity<GradeTo> putGrade(@RequestBody GradeTo grade) {
-        return ResponseEntity.ok(gradeService.update(grade));
+    @PatchMapping("/{gradeId}")
+    public ResponseEntity<GradeTo> putGrade(@RequestBody GradeTo grade, @PathVariable Long gradeId) {
+
+        return ResponseEntity.ok(gradeService.updateGrade(grade, gradeId));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteGrade(@RequestBody GradeTo grade) {
-        gradeService.delete(grade);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{gradeId}")
+    public ResponseEntity<Void> deleteGrade(@PathVariable Long gradeId) {
+
+        gradeService.deleteGrade(gradeId);
+        return ResponseEntity.ok().build();
     }
 }
