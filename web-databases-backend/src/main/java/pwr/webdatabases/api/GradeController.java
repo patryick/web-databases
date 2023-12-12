@@ -2,7 +2,7 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.webdatabases.data.model.GradeEntity;
+import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
@@ -18,13 +18,13 @@ public class GradeController {
     }
 
     @PostMapping
-    public ResponseEntity<GradeTo> postGrade(@RequestBody GradeTo grade) {
+    public ResponseEntity<GradeDetailsTo> postGrade(@RequestBody GradeTo grade) {
 
         return ResponseEntity.ok(gradeService.saveGrade(grade));
     }
 
     @PatchMapping("/{gradeId}")
-    public ResponseEntity<GradeTo> putGrade(@RequestBody GradeTo grade, @PathVariable Long gradeId) {
+    public ResponseEntity<GradeDetailsTo> putGrade(@RequestBody GradeTo grade, @PathVariable Long gradeId) {
 
         return ResponseEntity.ok(gradeService.updateGrade(grade, gradeId));
     }

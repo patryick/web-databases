@@ -6,7 +6,7 @@ public class StudentLessonDetailsTo extends AbstractTo {
 
     private String name;
     private String surname;
-    private List<GradeTo> grades;
+    private List<GradeDetailsTo> grades;
     private List<AbsenceTo> absences;
 
     public String getName() {
@@ -25,11 +25,11 @@ public class StudentLessonDetailsTo extends AbstractTo {
         this.surname = surname;
     }
 
-    public List<GradeTo> getGrades() {
+    public List<GradeDetailsTo> getGrades() {
         return grades;
     }
 
-    public void setGrades(List<GradeTo> grades) {
+    public void setGrades(List<GradeDetailsTo> grades) {
         this.grades = grades;
     }
 

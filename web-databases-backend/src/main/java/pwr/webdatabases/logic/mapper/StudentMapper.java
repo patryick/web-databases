@@ -12,7 +12,11 @@ public interface StudentMapper {
 
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
+    @Mapping(target = "name", source = "student.user.name")
+    @Mapping(target = "surname", source = "student.user.surname")
     StudentNameTo toNameTo(StudentEntity student);
 
+    @Mapping(target = "name", source = "student.user.name")
+    @Mapping(target = "surname", source = "student.user.surname")
     StudentLessonDetailsTo toLessonDetailsTo(StudentEntity student);
 }

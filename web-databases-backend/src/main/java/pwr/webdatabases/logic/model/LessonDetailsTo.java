@@ -2,7 +2,7 @@ package pwr.webdatabases.logic.model;
 
 import java.util.List;
 
-public class TeacherLessonDetailsTo extends TeacherLessonTo {
+public class LessonDetailsTo extends TeacherLessonTo {
 
     private List<StudentNameTo> students;
 

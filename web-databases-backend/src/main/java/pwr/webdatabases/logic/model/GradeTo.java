@@ -1,36 +1,32 @@
 package pwr.webdatabases.logic.model;
 
-import pwr.webdatabases.data.enums.GradeValueEnum;
+public class GradeTo extends GradeDetailsTo {
 
-import java.time.LocalDateTime;
+    private Long teacher;
+    private Long student;
+    private Long lesson;
 
-public class GradeTo extends AbstractTo {
-
-    private GradeValueEnum gradeValue;
-    private LocalDateTime date;
-    private String details;
-
-    public GradeValueEnum getGradeValue() {
-        return gradeValue;
+    public Long getTeacher() {
+        return teacher;
     }
 
-    public void setGradeValue(GradeValueEnum gradeValue) {
-        this.gradeValue = gradeValue;
+    public void setTeacher(Long teacher) {
+        this.teacher = teacher;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public Long getStudent() {
+        return student;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setStudent(Long student) {
+        this.student = student;
     }
 
-    public String getDetails() {
-        return details;
+    public Long getLesson() {
+        return lesson;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setLesson(Long lesson) {
+        this.lesson = lesson;
     }
 }

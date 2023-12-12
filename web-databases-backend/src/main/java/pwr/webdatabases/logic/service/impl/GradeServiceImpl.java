@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pwr.webdatabases.data.model.GradeEntity;
 import pwr.webdatabases.data.repository.jpa.GradeJpaRepo;
 import pwr.webdatabases.logic.mapper.GradeMapper;
+import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
@@ -29,7 +30,7 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public GradeTo updateGrade(GradeTo grade, Long gradeId) {
+    public GradeDetailsTo updateGrade(GradeTo grade, Long gradeId) {
 
         Objects.requireNonNull(grade);
         GradeEntity entity = gradeJpaRepo.getReferenceById(gradeId);
@@ -39,7 +40,7 @@ public class GradeServiceImpl implements GradeService {
         return gradeMapper.toTo(gradeJpaRepo.save(entity));
     }
 
-    private void updateGrade(GradeEntity entity, GradeTo to) {
+    private void updateGrade(GradeEntity entity, GradeDetailsTo to) {
 
         if (null != to.getGradeValue()){
             entity.setGradeValue(to.getGradeValue());

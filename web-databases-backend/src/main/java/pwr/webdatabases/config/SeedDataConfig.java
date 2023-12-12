@@ -55,7 +55,6 @@ public class SeedDataConfig implements CommandLineRunner {
 //        }
 
         TeacherEntity teacherEntity = new TeacherEntity();
-        teacherEntity.setName("teacher anna");
         teacherJpaRepo.save(teacherEntity);
 
         ClassEntity classEntity = new ClassEntity();
@@ -75,21 +74,26 @@ public class SeedDataConfig implements CommandLineRunner {
         lessonJpaRepo.save(lesson2);
 
         StudentEntity studentEntity = new StudentEntity();
-        studentEntity.setName("student patrick");
         studentEntity.setClassEntity(classEntity);
         studentJpaRepo.save(studentEntity);
 
         User student = new User();
+        student.setName("student");
+        student.setSurname("student");
         student.setUsername("student");
         student.setEmail("student@student.com");
         student.setPassword(passwordEncoder.encode("password"));
         student.setStudent(studentEntity);
+        student.setStudent(studentEntity);
         userService.save(student);
 
         User teacher = new User();
+        teacher.setName("teacher");
+        teacher.setSurname("teacher");
         teacher.setUsername("teacher");
         teacher.setEmail("teacher@teacher.com");
         teacher.setPassword(passwordEncoder.encode("password"));
+        teacher.setTeacher(teacherEntity);
         teacher.setTeacher(teacherEntity);
         userService.save(teacher);
 

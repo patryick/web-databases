@@ -30,6 +30,7 @@ public class AuthenticationService {
     }
 
     public JwtAuthenticationResponse signup(SignUpRequest request) {
+
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
@@ -41,16 +42,24 @@ public class AuthenticationService {
 
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);
+
         return jwtAuthenticationResponse;
     }
 
 
     public JwtAuthenticationResponse signin(SignInRequest request) {
+
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         var user = userRepo.findByUsername(request.getUsername())
             .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         var jwt = jwtService.generateToken(user);
+
+        return getJwtAuthenticationResponse(jwt, user);
+    }
+
+    private static JwtAuthenticationResponse getJwtAuthenticationResponse(String jwt, User user) {
+
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);
         if (user.getRole() == Role.STUDENT) {
@@ -59,6 +68,9 @@ public class AuthenticationService {
             jwtAuthenticationResponse.setUserId(user.getTeacher().getId());
         }
         jwtAuthenticationResponse.setRole(user.getRole());
+        jwtAuthenticationResponse.setName(user.getName());
+        jwtAuthenticationResponse.setSurname(user.getSurname());
+
         return jwtAuthenticationResponse;
     }
 }

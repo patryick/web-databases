@@ -15,8 +15,8 @@ public class StudentEntity extends AbstractEntity {
     private List<AbsenceEntity> absences;
     @ManyToOne
     private ClassEntity classEntity;
-    private String name;
-    private String surname;
+    @OneToOne
+    private User user;
     private LocalDateTime dateOfBirth;
 
     public ClassEntity getClassEntity() {
@@ -25,22 +25,6 @@ public class StudentEntity extends AbstractEntity {
 
     public void setClassEntity(ClassEntity classEntity) {
         this.classEntity = classEntity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public LocalDateTime getDateOfBirth() {
@@ -65,5 +49,13 @@ public class StudentEntity extends AbstractEntity {
 
     public void setAbsences(List<AbsenceEntity> absences) {
         this.absences = absences;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import pwr.webdatabases.data.model.LessonEntity;
 import pwr.webdatabases.logic.model.StudentLessonTo;
-import pwr.webdatabases.logic.model.TeacherLessonDetailsTo;
+import pwr.webdatabases.logic.model.LessonDetailsTo;
 import pwr.webdatabases.logic.model.TeacherLessonTo;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface LessonMapper {
 
     LessonMapper INSTANCE = Mappers.getMapper(LessonMapper.class);
 
-    @Mapping(target = "teacher", source = "lesson.teacher.name")
+    @Mapping(target = "teacher", source = "lesson.teacher.user.name")
     @Mapping(target = "day", source = "lesson.lessonDay")
     StudentLessonTo toTo(LessonEntity lesson);
 
@@ -24,7 +24,7 @@ public interface LessonMapper {
 
     @Mapping(target = "day", source = "lesson.lessonDay")
     @Mapping(target = "students", source = "lesson.classEntity.students")
-    TeacherLessonDetailsTo toStudentsTo(LessonEntity lesson);
+    LessonDetailsTo toStudentsTo(LessonEntity lesson);
 
     default List<TeacherLessonTo> toRawToList(List<LessonEntity> lessons) {
         return lessons.stream()

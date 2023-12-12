@@ -1,6 +1,7 @@
 package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pwr.webdatabases.logic.model.AbsenceTo;
 import pwr.webdatabases.logic.service.AbsenceService;
@@ -19,6 +20,7 @@ public class AbsenceController {
     }
 
     @GetMapping("/{studentId}/all")
+    @PreAuthorize("#studentId == authentication.principal.id")
     public ResponseEntity<List<AbsenceTo>> getAllByStudentId(@PathVariable Long studentId) {
         return ResponseEntity.ok(absenceService.findAllByStudentId(studentId));
     }
