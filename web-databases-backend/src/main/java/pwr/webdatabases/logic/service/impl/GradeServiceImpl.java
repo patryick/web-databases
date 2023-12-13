@@ -8,6 +8,7 @@ import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -18,6 +19,11 @@ public class GradeServiceImpl implements GradeService {
 
     public GradeServiceImpl(GradeJpaRepo gradeJpaRepo) {
         this.gradeJpaRepo = gradeJpaRepo;
+    }
+
+    @Override
+    public List<GradeDetailsTo> findAllGradesByStudentId(Long studentId) {
+        return gradeMapper.toDetailsToList(gradeJpaRepo.findAllByStudentId(studentId));
     }
 
     @Override

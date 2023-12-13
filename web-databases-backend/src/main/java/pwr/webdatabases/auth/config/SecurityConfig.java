@@ -69,7 +69,8 @@ public class SecurityConfig {
                 .requestMatchers(
                     mvcMatcherBuilder.pattern("/absences/*/all"),
                     mvcMatcherBuilder.pattern("/students/**"),
-                    mvcMatcherBuilder.pattern("/schedules/**")
+                    mvcMatcherBuilder.pattern("/schedules/**"),
+                    mvcMatcherBuilder.pattern("/grades/*/all")
                 )
                 .hasAnyAuthority(Role.STUDENT.toString(), Role.TEACHER.toString())
                 .requestMatchers(

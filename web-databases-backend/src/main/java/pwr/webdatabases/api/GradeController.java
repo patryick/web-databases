@@ -6,6 +6,8 @@ import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/grades")
@@ -15,6 +17,11 @@ public class GradeController {
 
     public GradeController(GradeService gradeService) {
         this.gradeService = gradeService;
+    }
+
+    @GetMapping("/{studentId}/all")
+    public ResponseEntity<List<GradeDetailsTo>> getAllGrades(@PathVariable Long studentId) {
+        return ResponseEntity.ok(gradeService.findAllGradesByStudentId(studentId));
     }
 
     @PostMapping
