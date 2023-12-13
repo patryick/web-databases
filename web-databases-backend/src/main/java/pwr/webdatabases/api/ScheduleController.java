@@ -22,13 +22,13 @@ public class ScheduleController {
     }
 
     @GetMapping("/students/{studentId}")
-    @PreAuthorize("#studentId == authentication.principal.id")
+    @PreAuthorize("#studentId == authentication.principal.student.id")
     public ResponseEntity<List<StudentLessonTo>> getScheduleForStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(scheduleService.getScheduleForStudent(studentId));
     }
 
     @GetMapping("/teachers/{teacherId}")
-    @PreAuthorize("#teacherId == authentication.principal.id")
+    @PreAuthorize("#teacherId == authentication.principal.teacher.id")
     public ResponseEntity<List<TeacherLessonTo>> getScheduleForTeacher(@PathVariable Long teacherId) {
         return ResponseEntity.ok(scheduleService.getScheduleForTeacher(teacherId));
     }
