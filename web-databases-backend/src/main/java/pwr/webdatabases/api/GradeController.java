@@ -1,7 +1,9 @@
 package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
 import pwr.webdatabases.logic.service.GradeService;
@@ -19,9 +21,10 @@ public class GradeController {
         this.gradeService = gradeService;
     }
 
-    @GetMapping("/{studentId}/all")
-    public ResponseEntity<List<GradeDetailsTo>> getAllGrades(@PathVariable Long studentId) {
-        return ResponseEntity.ok(gradeService.findAllGradesByStudentId(studentId));
+    @GetMapping("/students/all")
+    public ResponseEntity<List<GradeDetailsTo>> getAllGrades(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(gradeService.findAllGradesByStudentId(user.getStudent().getId()));
     }
 
     @PostMapping

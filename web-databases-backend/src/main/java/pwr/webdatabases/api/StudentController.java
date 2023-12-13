@@ -2,7 +2,9 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.StudentLessonDetailsTo;
 import pwr.webdatabases.logic.service.StudentService;
 
@@ -17,9 +19,9 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/{lessonId}/{studentId}")
-    @PreAuthorize("#studentId == authentication.principal.id")
-    public ResponseEntity<StudentLessonDetailsTo> getStudentLessonDetailsByIdAndLessonId(@PathVariable Long lessonId, @PathVariable Long studentId) {
-        return ResponseEntity.ok(studentService.findStudentLessonDetailsByIdAndLessonId(lessonId, studentId));
+    @GetMapping("/{lessonId}")
+    public ResponseEntity<StudentLessonDetailsTo> getStudentLessonDetailsByIdAndLessonId(@PathVariable Long lessonId, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(studentService.findStudentLessonDetailsByIdAndLessonId(lessonId, user.getStudent().getId()));
     }
 }

@@ -2,7 +2,9 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.AbsenceDetailsTo;
 import pwr.webdatabases.logic.model.AbsenceTo;
 import pwr.webdatabases.logic.service.AbsenceService;
@@ -20,10 +22,10 @@ public class AbsenceController {
         this.absenceService = absenceService;
     }
 
-    @GetMapping("/{studentId}/all")
-    @PreAuthorize("#studentId == authentication.principal.id")
-    public ResponseEntity<List<AbsenceDetailsTo>> getAllByStudentId(@PathVariable Long studentId) {
-        return ResponseEntity.ok(absenceService.findAllByStudentId(studentId));
+    @GetMapping("/students/all")
+    public ResponseEntity<List<AbsenceDetailsTo>> getAllByStudentId(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(absenceService.findAllByStudentId(user.getStudent().getId()));
     }
 
     @PostMapping

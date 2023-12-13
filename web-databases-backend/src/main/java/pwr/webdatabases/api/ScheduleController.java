@@ -2,7 +2,10 @@ package pwr.webdatabases.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.LessonDetailsTo;
 import pwr.webdatabases.logic.model.StudentLessonTo;
 import pwr.webdatabases.logic.model.TeacherLessonTo;
@@ -21,15 +24,15 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/students/{studentId}")
-    @PreAuthorize("#studentId == authentication.principal.student.id")
-    public ResponseEntity<List<StudentLessonTo>> getScheduleForStudent(@PathVariable Long studentId) {
-        return ResponseEntity.ok(scheduleService.getScheduleForStudent(studentId));
+    @GetMapping("/students")
+    public ResponseEntity<List<StudentLessonTo>> getScheduleForStudent(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(scheduleService.getScheduleForStudent(user.getStudent().getId()));
     }
 
-    @GetMapping("/teachers/{teacherId}")
-    @PreAuthorize("#teacherId == authentication.principal.teacher.id")
-    public ResponseEntity<List<TeacherLessonTo>> getScheduleForTeacher(@PathVariable Long teacherId) {
-        return ResponseEntity.ok(scheduleService.getScheduleForTeacher(teacherId));
+    @GetMapping("/teachers")
+    public ResponseEntity<List<TeacherLessonTo>> getScheduleForTeacher(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(scheduleService.getScheduleForTeacher(user.getTeacher().getId()));
     }
 }
