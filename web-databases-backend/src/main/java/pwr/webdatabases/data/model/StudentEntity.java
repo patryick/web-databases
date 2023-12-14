@@ -1,5 +1,6 @@
 package pwr.webdatabases.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import pwr.webdatabases.auth.data.model.User;
 
@@ -10,12 +11,16 @@ import java.util.List;
 public class StudentEntity extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+    @JsonIgnoreProperties("student")
     private List<GradeEntity> grades;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+    @JsonIgnoreProperties("student")
     private List<AbsenceEntity> absences;
     @ManyToOne
+    @JsonIgnoreProperties("student")
     private ClassEntity classEntity;
     @OneToOne
+    @JsonIgnoreProperties("student")
     private User user;
     private LocalDateTime dateOfBirth;
 

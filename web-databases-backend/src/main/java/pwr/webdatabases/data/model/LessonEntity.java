@@ -1,5 +1,6 @@
 package pwr.webdatabases.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
@@ -9,8 +10,10 @@ import java.time.LocalTime;
 public class LessonEntity extends AbstractEntity {
 
     @ManyToOne
+    @JsonIgnoreProperties("lessons")
     private TeacherEntity teacher;
     @ManyToOne
+    @JsonIgnoreProperties("lessons")
     private ClassEntity classEntity;
     private String name;
     private String lessonDay;

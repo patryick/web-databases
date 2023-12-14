@@ -123,6 +123,9 @@ public class SeedDataConfig implements CommandLineRunner {
             user.setPassword(passwordEncoder.encode(user.getName() + i));
             user.setStudent(student);
             userService.save(user);
+
+            student.setUser(user);
+            studentJpaRepo.save(student);
         }
 
         for (String day: DAY) {

@@ -1,5 +1,6 @@
 package pwr.webdatabases.auth.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,8 +29,10 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     @OneToOne
+    @JsonIgnoreProperties("user")
     private TeacherEntity teacher;
     @OneToOne
+    @JsonIgnoreProperties("user")
     private StudentEntity student;
 
     @Override
@@ -164,7 +167,6 @@ public class User implements UserDetails {
             ", name='" + name + '\'' +
             ", surname='" + surname + '\'' +
             ", teacher=" + teacher +
-            ", student=" + student +
             '}';
     }
 }

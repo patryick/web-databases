@@ -1,5 +1,6 @@
 package pwr.webdatabases.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class ClassEntity extends AbstractEntity {
 
     @OneToMany(mappedBy = "classEntity")
+    @JsonIgnoreProperties("classEntity")
     private List<StudentEntity> students;
     private String name;
 

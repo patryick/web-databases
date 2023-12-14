@@ -1,15 +1,21 @@
 package pwr.webdatabases.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import pwr.webdatabases.auth.data.model.User;
+
+import java.util.List;
 
 @Entity(name = "TEACHER")
 public class TeacherEntity extends AbstractEntity {
 
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnoreProperties("teacher")
+    private List<LessonEntity> lessons;
     @OneToOne
-    private LessonEntity lesson;
-    @OneToOne
+    @JsonIgnoreProperties("teacher")
     private User user;
 
     public User getUser() {
@@ -20,18 +26,18 @@ public class TeacherEntity extends AbstractEntity {
         this.user = user;
     }
 
-    public LessonEntity getLesson() {
-        return lesson;
+    public List<LessonEntity> getLessons() {
+        return lessons;
     }
 
-    public void setLesson(LessonEntity lesson) {
-        this.lesson = lesson;
+    public void setLessons(List<LessonEntity> lesson) {
+        this.lessons = lesson;
     }
 
     @Override
     public String toString() {
         return "TeacherEntity{" +
-            "lesson=" + lesson +
+            "lesson=" + lessons +
             ", user=" + user +
             '}';
     }

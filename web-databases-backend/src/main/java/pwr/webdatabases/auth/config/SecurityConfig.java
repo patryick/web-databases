@@ -79,6 +79,10 @@ public class SecurityConfig {
                     mvcMatcherBuilder.pattern("/lessons/**")
                 )
                 .hasAuthority(Role.TEACHER.toString())
+                .requestMatchers(
+                    mvcMatcherBuilder.pattern("/test/**")
+                )
+                .permitAll()
                 .anyRequest().denyAll()
             )
             .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
