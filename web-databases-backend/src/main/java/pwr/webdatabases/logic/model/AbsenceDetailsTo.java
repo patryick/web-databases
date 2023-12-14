@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class AbsenceDetailsTo extends AbstractTo {
 
-    @JsonFormat(pattern = "mm/dd/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate date;
 
     public LocalDate getDate() {

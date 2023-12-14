@@ -1,13 +1,16 @@
 package pwr.webdatabases.logic.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import pwr.webdatabases.data.enums.GradeValueEnum;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class GradeDetailsTo extends AbstractTo {
 
     private GradeValueEnum gradeValue;
-    private LocalDateTime date;
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    private LocalDate date;
     private String details;
 
     public GradeValueEnum getGradeValue() {
@@ -18,11 +21,11 @@ public class GradeDetailsTo extends AbstractTo {
         this.gradeValue = gradeValue;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

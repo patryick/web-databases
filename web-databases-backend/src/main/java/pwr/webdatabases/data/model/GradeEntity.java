@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import pwr.webdatabases.data.enums.GradeValueEnum;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "GRADE")
@@ -19,7 +21,7 @@ public class GradeEntity extends AbstractEntity {
     @JsonIgnoreProperties("grades")
     private LessonEntity lesson;
     private GradeValueEnum gradeValue;
-    private LocalDateTime date;
+    private LocalDate date;
     private String details;
 
     public TeacherEntity getTeacher() {
@@ -54,11 +56,11 @@ public class GradeEntity extends AbstractEntity {
         this.gradeValue = gradeValue;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
