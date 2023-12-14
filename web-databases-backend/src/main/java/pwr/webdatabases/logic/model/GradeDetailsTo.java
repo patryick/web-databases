@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
 
 public class GradeDetailsTo extends AbstractTo {
 
-    private GradeValueEnum gradeValue;
+    private int gradeValue;
     @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate date;
     private String details;
 
     public GradeValueEnum getGradeValue() {
-        return gradeValue;
+        return GradeValueEnum.of(gradeValue);
     }
 
     public void setGradeValue(GradeValueEnum gradeValue) {
-        this.gradeValue = gradeValue;
+        this.gradeValue = gradeValue.getValue();
     }
 
     public LocalDate getDate() {
