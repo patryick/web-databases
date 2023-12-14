@@ -8,7 +8,7 @@ public enum GradeValueEnum {
     FIVE(5),
     SIX(6);
 
-    private final int value;
+    private final Integer value;
 
      GradeValueEnum(int value) {
         this.value = value;

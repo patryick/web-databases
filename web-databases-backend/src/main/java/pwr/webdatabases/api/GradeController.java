@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
+import pwr.webdatabases.logic.model.StudentGradeTo;
 import pwr.webdatabases.logic.service.GradeService;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class GradeController {
     }
 
     @GetMapping("/students/all")
-    public ResponseEntity<List<GradeDetailsTo>> getAllGrades(Authentication authentication) {
+    public ResponseEntity<List<StudentGradeTo>> getAllGrades(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok(gradeService.findAllGradesByStudentId(user.getStudent().getId()));
     }

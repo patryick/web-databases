@@ -48,12 +48,12 @@ public class GradeEntity extends AbstractEntity {
         this.lesson = lesson;
     }
 
-    public GradeValueEnum getGradeValue() {
-        return gradeValue;
+    public Integer getGradeValue() {
+        return gradeValue.getValue();
     }
 
-    public void setGradeValue(GradeValueEnum gradeValue) {
-        this.gradeValue = gradeValue;
+    public void setGradeValue(Integer gradeValue) {
+        this.gradeValue = GradeValueEnum.of(gradeValue);
     }
 
     public LocalDate getDate() {

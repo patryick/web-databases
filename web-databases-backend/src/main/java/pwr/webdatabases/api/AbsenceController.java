@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pwr.webdatabases.auth.data.model.User;
 import pwr.webdatabases.logic.model.AbsenceDetailsTo;
 import pwr.webdatabases.logic.model.AbsenceTo;
+import pwr.webdatabases.logic.model.StudentAbsenceTo;
 import pwr.webdatabases.logic.service.AbsenceService;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class AbsenceController {
     }
 
     @GetMapping("/students/all")
-    public ResponseEntity<List<AbsenceDetailsTo>> getAllByStudentId(Authentication authentication) {
+    public ResponseEntity<List<StudentAbsenceTo>> getAllByStudentId(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok(absenceService.findAllByStudentId(user.getStudent().getId()));
     }

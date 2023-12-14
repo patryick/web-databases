@@ -6,6 +6,7 @@ import pwr.webdatabases.data.repository.jpa.AbsenceJpaRepo;
 import pwr.webdatabases.logic.mapper.AbsenceMapper;
 import pwr.webdatabases.logic.model.AbsenceDetailsTo;
 import pwr.webdatabases.logic.model.AbsenceTo;
+import pwr.webdatabases.logic.model.StudentAbsenceTo;
 import pwr.webdatabases.logic.service.AbsenceService;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public List<AbsenceDetailsTo> findAllByStudentId(Long studentId) {
-        return absenceMapper.toToList(absenceJpaRepo.findAllByStudentId(studentId));
+    public List<StudentAbsenceTo> findAllByStudentId(Long studentId) {
+        return absenceJpaRepo.findAllByStudentId(studentId).stream().map(absenceMapper::toStudent).toList();
     }
 
     @Override

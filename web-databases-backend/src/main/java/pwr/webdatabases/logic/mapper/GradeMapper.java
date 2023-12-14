@@ -1,13 +1,16 @@
 package pwr.webdatabases.logic.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import pwr.webdatabases.data.enums.GradeValueEnum;
 import pwr.webdatabases.data.model.GradeEntity;
 import pwr.webdatabases.data.model.LessonEntity;
 import pwr.webdatabases.data.model.StudentEntity;
 import pwr.webdatabases.data.model.TeacherEntity;
 import pwr.webdatabases.logic.model.GradeDetailsTo;
 import pwr.webdatabases.logic.model.GradeTo;
+import pwr.webdatabases.logic.model.StudentGradeTo;
 
 import java.util.List;
 
@@ -16,9 +19,24 @@ public interface GradeMapper {
 
     GradeMapper INSTANCE = Mappers.getMapper(GradeMapper.class);
 
+    @Mapping(target = "teacherName", source = "grade.teacher.user.name")
+    @Mapping(target = "teacherSurname", source = "grade.teacher.user.surname")
+    @Mapping(target = "lessonName", source = "grade.lesson.name")
+    StudentGradeTo toStudent(GradeEntity grade);
     GradeTo toTo(GradeEntity grade);
     GradeEntity toEntity(GradeTo grade);
-    List<GradeDetailsTo> toDetailsToList(List<GradeEntity> grades);
+    GradeDetailsTo toDetails(GradeEntity grade);
+    default List<GradeDetailsTo> toDetailsToList(List<GradeEntity> grades) {
+        return grades.stream().map(INSTANCE::toDetails).toList();
+    }
+
+    default Integer mapGradeValue(GradeValueEnum grade) {
+        return grade.getValue();
+    }
+
+    default GradeValueEnum mapGradeValue(Integer grade) {
+        return GradeValueEnum.of(grade);
+    }
 
     default Long mapTeacher(TeacherEntity teacher) {
         if (null == teacher) {
