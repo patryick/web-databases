@@ -2,22 +2,22 @@ package pwr.webdatabases.logic.model;
 
 public class StudentLessonTo extends TeacherLessonTo {
 
-    private String endTime;
-    private String teacher;
+    private String teacherName;
+    private String teacherSurname;
 
-    public String getEndTime() {
-        return endTime;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getTeacherSurname() {
+        return teacherSurname;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setTeacherSurname(String teacherSurname) {
+        this.teacherSurname = teacherSurname;
     }
 }

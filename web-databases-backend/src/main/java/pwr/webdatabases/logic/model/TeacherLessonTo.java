@@ -5,6 +5,7 @@ public class TeacherLessonTo extends AbstractTo {
     private String name;
     private String day;
     private String startTime;
+    private String endTime;
     private String location;
 
     public String getDay() {
@@ -37,5 +38,13 @@ public class TeacherLessonTo extends AbstractTo {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

@@ -16,7 +16,8 @@ public interface LessonMapper {
 
     LessonMapper INSTANCE = Mappers.getMapper(LessonMapper.class);
 
-    @Mapping(target = "teacher", source = "lesson.teacher.user.name")
+    @Mapping(target = "teacherName", source = "lesson.teacher.user.name")
+    @Mapping(target = "teacherSurname", source = "lesson.teacher.user.surname")git
     @Mapping(target = "day", source = "lesson.lessonDay")
     StudentLessonTo toStudentTo(LessonEntity lesson);
 
