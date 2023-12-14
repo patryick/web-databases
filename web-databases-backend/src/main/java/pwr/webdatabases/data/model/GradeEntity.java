@@ -69,16 +69,4 @@ public class GradeEntity extends AbstractEntity {
     public void setDetails(String details) {
         this.details = details;
     }
-
-    @Override
-    public String toString() {
-        return "GradeEntity{" +
-            "teacher=" + teacher +
-            ", student=" + student +
-            ", lesson=" + lesson +
-            ", gradeValue=" + gradeValue +
-            ", date=" + date +
-            ", details='" + details + '\'' +
-            '}';
-    }
 }

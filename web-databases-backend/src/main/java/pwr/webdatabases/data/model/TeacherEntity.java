@@ -33,12 +33,4 @@ public class TeacherEntity extends AbstractEntity {
     public void setLessons(List<LessonEntity> lesson) {
         this.lessons = lesson;
     }
-
-    @Override
-    public String toString() {
-        return "TeacherEntity{" +
-            "lesson=" + lessons +
-            ", user=" + user +
-            '}';
-    }
 }

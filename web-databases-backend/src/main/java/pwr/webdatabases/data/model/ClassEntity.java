@@ -28,12 +28,4 @@ public class ClassEntity extends AbstractEntity {
     public void setStudents(List<StudentEntity> students) {
         this.students = students;
     }
-
-    @Override
-    public String toString() {
-        return "ClassEntity{" +
-            "students=" + students +
-            ", name='" + name + '\'' +
-            '}';
-    }
 }

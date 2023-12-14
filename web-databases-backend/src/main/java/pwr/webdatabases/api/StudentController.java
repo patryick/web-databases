@@ -19,9 +19,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/{lessonId}")
-    public ResponseEntity<StudentLessonDetailsTo> getStudentLessonDetailsByIdAndLessonId(@PathVariable Long lessonId, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(studentService.findStudentLessonDetailsByIdAndLessonId(lessonId, user.getStudent().getId()));
+    @GetMapping("/{studentId}/{lessonId}")
+    public ResponseEntity<StudentLessonDetailsTo> getStudentLessonDetailsByIdAndLessonId(@PathVariable Long lessonId, @PathVariable Long studentId) {
+        return ResponseEntity.ok(studentService.findStudentLessonDetailsByIdAndLessonId(lessonId, studentId));
     }
 }

@@ -24,6 +24,6 @@ public class LessonServiceImpl implements LessonService {
         if (entity == null) {
             throw new RuntimeException("Lesson with id: " + lessonId + " not found");
         }
-        return lessonMapper.toStudentsTo(entity);
+        return lessonMapper.toDetailsTo(entity);
     }
 }

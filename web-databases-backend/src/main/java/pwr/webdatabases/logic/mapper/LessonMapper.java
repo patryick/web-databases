@@ -18,14 +18,14 @@ public interface LessonMapper {
 
     @Mapping(target = "teacher", source = "lesson.teacher.user.name")
     @Mapping(target = "day", source = "lesson.lessonDay")
-    StudentLessonTo toTo(LessonEntity lesson);
+    StudentLessonTo toStudentTo(LessonEntity lesson);
 
     @Mapping(target = "day", source = "lesson.lessonDay")
-    TeacherLessonTo toRawTo(LessonEntity lesson);
+    TeacherLessonTo toTeacherTo(LessonEntity lesson);
 
     @Mapping(target = "day", source = "lesson.lessonDay")
     @Mapping(target = "students", source = "lesson.classEntity.students")
-    LessonDetailsTo toStudentsTo(LessonEntity lesson);
+    LessonDetailsTo toDetailsTo(LessonEntity lesson);
 
     default String map(LocalTime time) {
         return time.toString();
@@ -33,13 +33,13 @@ public interface LessonMapper {
 
     default List<TeacherLessonTo> toRawToList(List<LessonEntity> lessons) {
         return lessons.stream()
-            .map(this::toRawTo)
+            .map(this::toTeacherTo)
             .toList();
     }
 
     default List<StudentLessonTo> toDetailsToList(List<LessonEntity> lessons) {
         return lessons.stream()
-            .map(this::toTo)
+            .map(this::toStudentTo)
             .toList();
     }
 }

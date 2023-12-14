@@ -106,6 +106,9 @@ public class SeedDataConfig implements CommandLineRunner {
             user.setPassword(passwordEncoder.encode("teacher" + user.getName() + i));
             user.setTeacher(teacher);
             userService.save(user);
+
+            teacher.setUser(user);
+            teacherJpaRepo.save(teacher);
         }
 
         for (int i = 0; i < 24; i++) {
@@ -138,6 +141,7 @@ public class SeedDataConfig implements CommandLineRunner {
                 lesson.setEndTime(time.plusMinutes(45));
                 lesson.setClassEntity(firstClassA);
                 lesson.setTeacher(teachers.get(random.nextInt(teachers.size() - 1)));
+                lesson.setLocation("203b");
                 lessonJpaRepo.save(lesson);
             }
         }

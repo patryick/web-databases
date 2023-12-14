@@ -19,6 +19,7 @@ public class LessonEntity extends AbstractEntity {
     private String lessonDay;
     private LocalTime startTime;
     private LocalTime endTime;
+    private String location;
 
     public TeacherEntity getTeacher() {
         return teacher;
@@ -68,15 +69,11 @@ public class LessonEntity extends AbstractEntity {
         this.endTime = endTime;
     }
 
-    @Override
-    public String toString() {
-        return "LessonEntity{" +
-            "teacher=" + teacher +
-            ", classEntity=" + classEntity +
-            ", name='" + name + '\'' +
-            ", lessonDay='" + lessonDay + '\'' +
-            ", startTime='" + startTime + '\'' +
-            ", endTime='" + endTime + '\'' +
-            '}';
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

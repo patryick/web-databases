@@ -31,8 +31,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new RuntimeException("Student with id: " + studentId + " not found");
         }
         Long classId = studentEntity.getClassEntity().getId();
+        List<LessonEntity> lessons = lessonJpaRepo.findAllByClassEntityId(classId);
 
-        return lessonMapper.toDetailsToList(lessonJpaRepo.findAllByClassEntityId(classId));
+        return lessonMapper.toDetailsToList(lessons);
     }
 
 
